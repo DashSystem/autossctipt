@@ -242,7 +242,6 @@ chkconfig crond on
 
 # info
 clear
-echo "JualSSH.com | @arieonline | KangArie | 7946F434" | tee log-install.txt
 echo "===============================================" | tee -a log-install.txt
 echo ""  | tee -a log-install.txt
 echo "Service"  | tee -a log-install.txt
