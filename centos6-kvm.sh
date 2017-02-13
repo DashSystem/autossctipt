@@ -128,6 +128,7 @@ wget -O /etc/openvpn/1194-client.ovpn "https://raw.github.com/arieonline/autoscr
 sed -i $MYIP2 /etc/openvpn/1194-client.ovpn;
 sed -i "s/auth-user-pass pass.txt/auth-user-pass/g" /etc/openvpn/1194-client.ovpn
 #tar cf client.tar 1194-client.ovpn pass.txt
+echo "" "http-proxy $MYIP2 8080" >> /etc/openvpn/1194-client.ovpn
 cp 1194-client.ovpn /home/vps/public_html/
 cd
 
