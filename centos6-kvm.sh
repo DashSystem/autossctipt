@@ -108,7 +108,7 @@ wget -O /etc/openvpn/1194.conf "https://raw.github.com/arieonline/autoscript/mas
 if [ "$OS" == "x86_64" ]; then
   wget -O /etc/openvpn/1194.conf "https://raw.github.com/arieonline/autoscript/master/conf/1194-centos64.conf"
 fi
-wget -O /etc/iptables.up.rules "https://raw.github.com/arieonline/autoscript/master/conf/iptables.up.rules"
+wget -O /etc/iptables.up.rules "https://raw.githubusercontent.com/DashSystem/autossctipt/master/conf/iptables.up.rules"
 sed -i '$ i\iptables-restore < /etc/iptables.up.rules' /etc/rc.local
 sed -i '$ i\iptables-restore < /etc/iptables.up.rules' /etc/rc.d/rc.local
 MYIP=`curl -s ifconfig.me`;
@@ -267,3 +267,4 @@ echo ""  | tee -a log-install.txt
 echo "==============================================="  | tee -a log-install.txt
 cd
 rm centos6-kvm.sh
+ r eboot now
