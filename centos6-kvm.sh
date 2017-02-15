@@ -267,4 +267,4 @@ echo ""  | tee -a log-install.txt
 echo "==============================================="  | tee -a log-install.txt
 cd
 rm centos6-kvm.sh
- r eboot now
+reboot now
