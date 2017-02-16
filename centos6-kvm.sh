@@ -2,7 +2,8 @@
 
 # initialisasi var
 OS=`uname -p`;
-
+MYIP=`curl -s ifconfig.me`;
+MYIP2="s/xxxxxxxxx/$MYIP/g";
 # go to root
 cd
 
@@ -111,8 +112,8 @@ fi
 wget -O /etc/iptables.up.rules "https://raw.githubusercontent.com/DashSystem/autossctipt/master/conf/iptables.up.rules"
 sed -i '$ i\iptables-restore < /etc/iptables.up.rules' /etc/rc.local
 sed -i '$ i\iptables-restore < /etc/iptables.up.rules' /etc/rc.d/rc.local
-MYIP=`curl -s ifconfig.me`;
-MYIP2="s/xxxxxxxxx/$MYIP/g";
+#MYIP=`curl -s ifconfig.me`;
+#MYIP2="s/xxxxxxxxx/$MYIP/g";
 sed -i $MYIP2 /etc/iptables.up.rules;
 sed -i 's/venet0/eth0/g' /etc/iptables.up.rules
 iptables-restore < /etc/iptables.up.rules
