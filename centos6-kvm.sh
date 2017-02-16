@@ -3,7 +3,9 @@
 # initialisasi var
 OS=`uname -p`;
 MYIP=`curl -s ifconfig.me`;
-MYIP2="s/xxxxxxxxx/$MYIP/g";
+myip="$(dig +short myip.opendns.com @resolver1.opendns.com)"
+#echo "My WAN/Public IP address: ${myip}"
+MYIP2x="s/xxxxxxxxx/$myip/g";
 # go to root
 cd
 
@@ -126,10 +128,10 @@ cd
 # configure openvpn client config
 cd /etc/openvpn/
 wget -O /etc/openvpn/1194-client.ovpn "https://raw.github.com/arieonline/autoscript/master/conf/1194-client.conf"
-sed -i $MYIP2 /etc/openvpn/1194-client.ovpn;
+sed -i $MYIP2x /etc/openvpn/1194-client.ovpn;
 sed -i "s/auth-user-pass pass.txt/auth-user-pass/g" /etc/openvpn/1194-client.ovpn
 #tar cf client.tar 1194-client.ovpn pass.txt
-echo "" "http-proxy $MYIP2 8080" >> /etc/openvpn/1194-client.ovpn
+echo "" "http-proxy $myip 8080" >> /etc/openvpn/1194-client.ovpn
 cp 1194-client.ovpn /home/vps/public_html/
 cd
 
@@ -197,7 +199,7 @@ chkconfig fail2ban on
 # install squid
 yum -y install squid
 wget -O /etc/squid/squid.conf "https://raw.github.com/arieonline/autoscript/master/conf/squid-centos.conf"
-sed -i $MYIP2 /etc/squid/squid.conf;
+sed -i $MYIP2x /etc/squid/squid.conf;
 service squid restart
 chkconfig squid on
 
@@ -246,7 +248,7 @@ echo "===============================================" | tee -a log-install.txt
 echo ""  | tee -a log-install.txt
 echo "Service"  | tee -a log-install.txt
 echo "-------"  | tee -a log-install.txt
-echo "OpenVPN  : TCP 1194 (client config : http://$MYIP/1194-client.ovpn)"  | tee -a log-install.txt
+echo "OpenVPN  : TCP 1194 (client config : http://$myip/1194-client.ovpn)"  | tee -a log-install.txt
 echo "OpenSSH  : 22, 143"  | tee -a log-install.txt
 echo "Dropbear : 109, 110, 443"  | tee -a log-install.txt
 echo "Squid3   : 8080 (limit to IP SSH)"  | tee -a log-install.txt
@@ -254,9 +256,9 @@ echo "badvpn   : badvpn-udpgw port 7300"  | tee -a log-install.txt
 echo ""  | tee -a log-install.txt
 echo "Tools"  | tee -a log-install.txt
 echo
-echo "Webmin   : http://$MYIP:10000/"  | tee -a log-install.txt
-echo "vnstat   : http://$MYIP/vnstat/"  | tee -a log-install.txt
-echo "MRTG     : http://$MYIP/mrtg/"  | tee -a log-install.txt
+echo "Webmin   : http://$myip:10000/"  | tee -a log-install.txt
+echo "vnstat   : http://$myip/vnstat/"  | tee -a log-install.txt
+echo "MRTG     : http://$myip/mrtg/"  | tee -a log-install.txt
 echo "Timezone : Asia/Jakarta"  | tee -a log-install.txt
 echo "Fail2Ban : [on]"  | tee -a log-install.txt
 echo "IPv6     : [off]"  | tee -a log-install.txt
