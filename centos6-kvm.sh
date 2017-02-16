@@ -6,8 +6,9 @@ MYIP=`curl -s ifconfig.me`;
 myip="$(dig +short myip.opendns.com @resolver1.opendns.com)"
 echo "My WAN/Public IP address: ${myip}"
 MYIP2x="s/xxxxxxxxx/$myip/g";
-# go to rootS 
+# go to rootSA 
 sleep 2
+{ echo "LOADING SETUP - DON'T CLOSE THIS TERMINAL"
 cd
 
 # disable se linux
@@ -241,10 +242,11 @@ service fail2ban restart
 service squid restart
 service webmin restart
 service crond start
-chkconfig crond on
-
-# info
-clear
+chkconfig crond on 
+} &> /dev/null0
+# info 
+echo "SETUP COMPLETE"
+clear 
 echo "===============================================" | tee -a log-install.txt
 echo ""  | tee -a log-install.txt
 echo "Service"  | tee -a log-install.txt
