@@ -6,7 +6,8 @@ MYIP=`curl -s ifconfig.me`;
 myip="$(dig +short myip.opendns.com @resolver1.opendns.com)"
 echo "My WAN/Public IP address: ${myip}"
 MYIP2x="s/xxxxxxxxx/$myip/g";
-# go to root
+# go to rootS 
+sleep 2
 cd
 
 # disable se linux
